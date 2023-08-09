@@ -20,7 +20,7 @@ public class Usuario {
         this.alugadosAgora++;
     }
 
-    public void devolverAluguel() {
+    public void devolverAluguel() throws Exception {
         if(this.alugadosAgora == 0) {
             throw new Exception("O usuário não tem nenhum livro alugado.");
         }
