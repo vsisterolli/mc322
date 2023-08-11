@@ -19,7 +19,7 @@ public class Livros {
         return this.quantidadeDisponivel > 0;
     }
 
-    public void registrarAluguel() {
+    public void registrarAluguel() throws Exception {
         if(!this.disponivelParaAlugar()) {
             throw new Exception("Esse livro não está disponível para ser alugado");
         }
@@ -40,44 +40,50 @@ public class Livros {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getAutor() {
         return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
     }
 
     public String[] getGeneros() {
         return generos;
     }
 
-    public void setGeneros(String[] generos) {
-        this.generos = generos;
-    }
-
     public String getIdioma() {
         return idioma;
-    }
-
-    public void setIdioma(String idioma) {
-        this.idioma = idioma;
     }
 
     public int getEdicao() {
         return edicao;
     }
 
-    public void setEdicao(int edicao) {
-        this.edicao = edicao;
-    }
-
     public int getQuantidadeDisponivel() {
         return quantidadeDisponivel;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public void setGeneros(String[] generos) {
+        this.generos = generos;
+    }
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
+    }
+
+    public void setEdicao(int edicao) {
+        this.edicao = edicao;
+    }
+
+    public void setQuantidadeDisponivel(int quantidadeDisponivel) throws Exception {
+        if(quantidadeDisponivel < 0) {
+            throw new Exception("A quantidade disponível não pode ser negativa.");
+        }
+        this.quantidadeDisponivel = quantidadeDisponivel;
+    }
 }
