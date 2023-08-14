@@ -1,3 +1,5 @@
+package main;
+
 public class Livros {
     private String nome;
     private String autor;
@@ -6,7 +8,9 @@ public class Livros {
     private int edicao;
     private int quantidadeDisponivel;
 
-    public Livros(String nome, String autor, String[] generos, String idioma, int edicao, int quantidadeDisponivel) {
+    public Livros(String nome, String autor, String[] generos, String idioma, int edicao, int quantidadeDisponivel) throws Exception {
+        if(quantidadeDisponivel < 0)
+            throw new Exception("O livro não pode ter disponibilidade negativa");
         this.nome = nome;
         this.autor = autor;
         this.generos = generos;
@@ -19,6 +23,14 @@ public class Livros {
         return this.quantidadeDisponivel > 0;
     }
 
+    public Boolean incluiGenero(String genero) {
+        for(String atual : generos) {
+            if(genero == atual) {
+                return true;
+            }
+        }
+        return false;
+    }
     public void registrarAluguel() throws Exception {
         if(!this.disponivelParaAlugar()) {
             throw new Exception("Esse livro não está disponível para ser alugado");

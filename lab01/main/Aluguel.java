@@ -1,3 +1,6 @@
+package main;
+
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -9,7 +12,10 @@ public class Aluguel {
         return multaDiaria;
     }
 
-    public static void setMultaDiaria(double multaDiaria) {
+    public static void setMultaDiaria(double multaDiaria) throws Exception {
+        if(multaDiaria < 0) {
+            throw new Exception("A multa diária não pode ser negativa.");
+        }
         Aluguel.multaDiaria = multaDiaria;
     }
 
@@ -17,7 +23,10 @@ public class Aluguel {
     private Livros livro;
     private LocalDate expiraEm;
 
-    private Aluguel(Usuario usuario, Livros livro, LocalDate expiraEm) {
+    private Aluguel(Usuario usuario, Livros livro, LocalDate expiraEm) throws Exception {
+        if(expiraEm.isBefore(LocalDate.now())) {
+            throw new Exception("A data de expiração deve ser uma data futura");
+        }
         this.usuario = usuario;
         this.livro = livro;
         this.expiraEm = expiraEm;
@@ -29,6 +38,9 @@ public class Aluguel {
         }
         if(!livro.disponivelParaAlugar()) {
             throw new Exception("Esse livro não está disponível para ser alugado");
+        }
+        if(usuario.getAluguelDiasMaximos() < Duration.between(expiraEm, LocalDate.now()).toDays()) {
+            throw new Exception("Este usuario não tem permissão para registrar um aluguel tão longo.");
         }
         usuario.registrarAluguel();
         livro.registrarAluguel();

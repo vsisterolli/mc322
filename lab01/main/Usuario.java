@@ -1,8 +1,20 @@
+package main;
+
 public class Usuario {
+
+    protected int aluguelDiasMaximos = 7;
+    public int getAluguelDiasMaximos() {
+        return aluguelDiasMaximos;
+    }
+
+    public void setAluguelDiasMaximos(int aluguelDiasMaximos) {
+        this.aluguelDiasMaximos = aluguelDiasMaximos;
+    }
+
     private String nome;
     private int totalAlugados;
     private int alugadosAgora;
-    private double multaPendente;
+    protected double multaPendente;
 
     public Usuario(String nome) {
         this.nome = nome;
